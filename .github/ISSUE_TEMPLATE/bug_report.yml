@@ -1,0 +1,81 @@
+name: 🐛 گزارش باگ
+description: یک مشکل یا خطا در برنامه گزارش دهید
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 گزارش باگ
+        ممنون که وقت می‌ذارید و مشکل رو گزارش می‌دید!
+        لطفاً اطلاعات زیر رو کامل پر کنید.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: پیش‌نیازها
+      options:
+        - label: آخرین نسخه برنامه رو نصب کردم
+          required: true
+        - label: چک کردم که این مشکل قبلاً گزارش نشده باشه
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: توضیح مشکل
+      description: مشکل رو واضح و کامل توضیح بدید
+      placeholder: مثلاً وقتی روی دکمه X کلیک می‌کنم، برنامه بسته می‌شه
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: مراحل بازتولید
+      description: چطور می‌تونیم این مشکل رو دوباره ببینیم؟
+      placeholder: |
+        1. برو به صفحه ...
+        2. روی گزینه ... کلیک کن
+        3. خطا ظاهر می‌شه
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: رفتار مورد انتظار
+      description: انتظار داشتید چه اتفاقی بیفته؟
+    validations:
+      required: true
+
+  - type: input
+    id: app_version
+    attributes:
+      label: نسخه برنامه
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: android_version
+    attributes:
+      label: نسخه اندروید
+      placeholder: "Android 13"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: مدل گوشی
+      placeholder: "Samsung Galaxy A54"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: اسکرین‌شات (اختیاری)
+    validations:
+      required: false
