@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 مستندات و راهنما
+    url: https://home3deh.github.io/rozeman/
+    about: راهنمای کامل نصب و استفاده
+  - name: 📥 دانلود آخرین نسخه
+    url: https://github.com/Home3deh/rozeman/releases/latest
+    about: دانلود مستقیم APK
+  - name: 📧 تماس ایمیل
+    url: mailto:ali.maleki.ir@gmail.com
+    about: برای مسائل خصوصی یا حساس
