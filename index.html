@@ -61,7 +61,6 @@
             padding: 24px 16px 40px;
         }
 
-        /* Decorative blobs */
         body::before,
         body::after {
             content: '';
@@ -434,6 +433,136 @@
             font-weight: 700;
         }
 
+        /* ===== FAQ Section ===== */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffffff 100%);
+            border: 1px solid rgba(214, 51, 108, 0.1);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 8px 24px rgba(214, 51, 108, 0.1);
+        }
+
+        .faq-item[open] {
+            background: linear-gradient(135deg, #fff0f5 0%, #fff5f8 100%);
+            border-color: var(--primary-light);
+            box-shadow: 0 10px 30px rgba(214, 51, 108, 0.15);
+        }
+
+        .faq-question {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 22px;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+
+        .faq-question::-webkit-details-marker { display: none; }
+        .faq-question::marker { content: ''; }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4em;
+            font-weight: 400;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .faq-item[open] .faq-question::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .faq-question:hover { color: var(--primary); }
+
+        .faq-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(214, 51, 108, 0.1) 0%, rgba(248, 165, 184, 0.15) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95em;
+        }
+
+        .faq-answer {
+            padding: 0 22px 20px 22px;
+            color: #4a3540;
+            font-size: 0.94em;
+            line-height: 1.9;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .faq-answer p { margin-bottom: 8px; }
+        .faq-answer p:last-child { margin-bottom: 0; }
+
+        .faq-answer code {
+            background: rgba(214, 51, 108, 0.08);
+            color: var(--primary-dark);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .faq-answer ol {
+            padding-right: 20px;
+            margin: 8px 0;
+        }
+
+        .faq-answer ol li {
+            padding: 4px 0;
+            color: #4a3540;
+        }
+
+        .faq-answer ul {
+            list-style: none;
+            padding-right: 0;
+            margin: 8px 0;
+        }
+
+        .faq-answer ul li {
+            padding: 4px 0;
+            color: #4a3540;
+        }
+
+        .faq-answer a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary-light);
+        }
+
+        .faq-answer a:hover {
+            color: var(--primary-dark);
+            border-bottom-style: solid;
+        }
+
         /* ===== Footer ===== */
         .footer {
             margin-top: 32px;
@@ -482,6 +611,9 @@
             .store-row { grid-template-columns: 1fr; }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
             .app-icon { width: 92px; height: 92px; font-size: 46px; }
+            .faq-question { padding: 16px 18px; font-size: 0.95em; }
+            .faq-question::after { left: 18px; }
+            .faq-answer { padding: 0 18px 18px 18px; }
         }
 
         @media (min-width: 768px) {
@@ -504,6 +636,8 @@
             .feature-card:nth-child(4) { animation-delay: 0.35s; }
             .feature-card:nth-child(5) { animation-delay: 0.4s; }
             .feature-card:nth-child(6) { animation-delay: 0.45s; }
+            .feature-card:nth-child(7) { animation-delay: 0.5s; }
+            .feature-card:nth-child(8) { animation-delay: 0.55s; }
         }
     </style>
 </head>
@@ -589,6 +723,109 @@
                 «روز من» رایگان است و با عشق تقدیم می‌شود به شهدای میناب...
                 <br>
                 روز من — تا روز انتقام. 🤲
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2 class="section-title">❓ سؤالات متداول</h2>
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">📥</span>
+                        <span>چطور برنامه رو نصب کنم؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>نصب برنامه خیلی ساده‌ست:</p>
+                        <ol>
+                            <li>روی دکمه <strong>«دانلود مستقیم APK»</strong> بالای همین صفحه بزن</li>
+                            <li>فایل <code>rozeman-v1.0.0.apk</code> دانلود می‌شه (~۶۰ مگ)</li>
+                            <li>در تنظیمات گوشی، گزینه <strong>«نصب از منابع ناشناس»</strong> رو برای مرورگر فعال کن</li>
+                            <li>روی فایل دانلود شده بزن و <strong>Install</strong> رو انتخاب کن</li>
+                        </ol>
+                        <p>تمام! برنامه آماده استفاده‌ست 🌹</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">🏪</span>
+                        <span>چرا از کافه‌بازار یا مایکت دانلود نکنم؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>برنامه در حال حاضر در حال بررسی توسط کافه‌بازار و مایکت هست. به‌محض تأیید، لینک‌ها به همین صفحه اضافه می‌شن.</p>
+                        <p>تا اون موقع، می‌تونی از <strong>دکمه دانلود مستقیم</strong> استفاده کنی — نسخه یکسان و امن هست ✅</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">🛡️</span>
+                        <span>آیا اطلاعات من امن است؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>بله! برنامه «روز من» <strong>هیچ اطلاعاتی از شما جمع‌آوری نمی‌کند</strong>.</p>
+                        <p>تمام داده‌ها (برنامه‌های درسی، تکالیف، خاطرات) فقط روی گوشی خودتان ذخیره می‌شن. هیچ سروری وجود نداره و برنامه <strong>کاملاً آفلاین</strong> کار می‌کنه.</p>
+                        <p>برای جزئیات بیشتر، <a href="privacy.html">صفحه حریم خصوصی</a> رو ببین.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">💾</span>
+                        <span>اگه گوشی عوض کنم، اطلاعاتم چی می‌شه؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>چون اطلاعات فقط روی گوشی ذخیره می‌شه، با عوض کردن گوشی اطلاعات منتقل نمی‌شه. توصیه می‌کنیم:</p>
+                        <ul>
+                            <li>📸 از داده‌های مهم <strong>اسکرین‌شات</strong> بگیرید</li>
+                            <li>✍️ اطلاعات کلیدی رو <strong>یادداشت</strong> کنید</li>
+                        </ul>
+                        <p>قابلیت <strong>پشتیبان‌گیری ابری</strong> در نسخه‌های آینده اضافه می‌شه 🌟</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">💰</span>
+                        <span>آیا برنامه واقعاً رایگانه؟ تبلیغات داره؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>بله، <strong>کاملاً رایگان</strong> و <strong>بدون هیچ تبلیغی</strong>.</p>
+                        <p>برنامه با عشق تقدیم می‌شه به شهدای میناب و تمام دانش‌آموزان ایران. هدف ما کمک به یادگیری بهتره، نه کسب درآمد. 🌹</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">📱</span>
+                        <span>چرا فایل APK حجمش زیاده (~۶۰ مگ)؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>چون برنامه با <strong>Flutter</strong> ساخته شده و شامل:</p>
+                        <ul>
+                            <li>🎨 فونت‌های فارسی (Vazirmatn)</li>
+                            <li>📚 کتابخانه‌های تصویری و انیمیشن</li>
+                            <li>🔧 کدهای اجرایی برای همه معماری‌های گوشی</li>
+                        </ul>
+                        <p>این حجم کاملاً طبیعی برای اپ‌های Flutter هست و تضمین می‌کنه روی همه گوشی‌ها روان کار کنه.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span class="faq-icon">📩</span>
+                        <span>چطور با پشتیبانی تماس بگیرم؟</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>برای گزارش مشکل، پیشنهاد امکانات جدید یا هر سؤالی:</p>
+                        <p>📧 ایمیل: <a href="mailto:ali.maleki.ir@gmail.com">ali.maleki.ir@gmail.com</a></p>
+                        <p>💻 یا از طریق <a href="https://github.com/Home3deh/rozeman/issues" target="_blank" rel="noopener">Issues در GitHub</a></p>
+                        <p>سعی می‌کنیم در کمتر از ۴۸ ساعت پاسخ بدیم 🌹</p>
+                    </div>
+                </details>
+
             </div>
         </div>
 
