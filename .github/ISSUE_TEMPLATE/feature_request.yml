@@ -1,1 +1,33 @@
+name: ✨ پیشنهاد امکانات
+description: ایده یا امکان جدیدی برای برنامه پیشنهاد دهید
+title: "[Feature]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✨ پیشنهاد امکانات جدید
+        ممنون که به فکر بهتر شدن «روز من» هستید! 💚
 
+  - type: textarea
+    id: problem
+    attributes:
+      label: مشکل یا نیاز
+      description: چه مشکلی دارید که این امکان حلش می‌کنه؟
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: راه‌حل پیشنهادی
+      description: دقیقاً چه امکانی رو پیشنهاد می‌دید؟
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: اطلاعات اضافی (اختیاری)
+    validations:
+      required: false
