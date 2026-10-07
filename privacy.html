@@ -3,60 +3,561 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="سیاست حریم خصوصی برنامه روز من — بدون جمع‌آوری داده، بدون تبلیغات، کاملاً آفلاین.">
+    <meta name="theme-color" content="#d6336c">
+    
     <title>حریم خصوصی — روز من</title>
+    
+    <link rel="icon" type="image/png" href="images/icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #d6336c;
+            --primary-light: #f8a5b8;
+            --primary-dark: #a61e4d;
+            --bg-1: #fff0f5;
+            --bg-2: #ffe4ec;
+            --text-dark: #2d1b25;
+            --text-light: #7a5c69;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 20px rgba(214, 51, 108, 0.08);
+            --shadow-md: 0 10px 40px rgba(214, 51, 108, 0.15);
+            --shadow-lg: 0 20px 60px rgba(214, 51, 108, 0.2);
+            --radius: 24px;
+            --radius-sm: 16px;
+            --success: #22c55e;
+            --success-bg: #dcfce7;
+            --success-text: #15803d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Tahoma', sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            line-height: 2;
-            color: #333;
-            background: #fff5f7;
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(248, 165, 184, 0.35) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(214, 51, 108, 0.2) 0%, transparent 45%),
+                linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding: 24px 16px 40px;
+            overflow-x: hidden;
         }
-        h1 { color: #d6336c; border-bottom: 2px solid #f8a5b8; padding-bottom: 10px; }
-        h2 { color: #d6336c; margin-top: 30px; }
-        ul { padding-right: 20px; }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            pointer-events: none;
+            animation: float 12s ease-in-out infinite;
+        }
+        body::before {
+            width: 400px; height: 400px;
+            background: var(--primary-light);
+            top: -100px; right: -100px;
+        }
+        body::after {
+            width: 350px; height: 350px;
+            background: var(--primary);
+            bottom: -100px; left: -100px;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -20px) scale(1.05); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(248, 165, 184, 0.2);
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
-        a { color: #d6336c; }
+
+        /* ===== Back Button ===== */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92em;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-link:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+            color: var(--primary-dark);
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: fadeUp 0.8s ease both;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+        }
+
+        .header-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 10px 30px rgba(214, 51, 108, 0.3);
+        }
+
+        .header h1 {
+            font-size: clamp(1.6em, 4vw, 2em);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .header h1 span { color: var(--primary); }
+
+        .header p {
+            color: var(--text-light);
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .updated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin-top: 14px;
+            border: 1px solid rgba(214, 51, 108, 0.15);
+        }
+
+        /* ===== Highlight Card ===== */
+        .highlight {
+            background: linear-gradient(135deg, var(--success-bg) 0%, #f0fdf4 100%);
+            border: 1.5px solid rgba(34, 197, 94, 0.25);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.1s;
+        }
+
+        .highlight-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+        }
+
+        .highlight-content h3 {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--success-text);
+            margin-bottom: 6px;
+        }
+
+        .highlight-content p {
+            color: #166534;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        /* ===== Section Card ===== */
+        .section {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius);
+            padding: 28px 28px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.2s;
+        }
+
+        .section-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(214, 51, 108, 0.25);
+        }
+
+        .section p {
+            color: #4a3540;
+            font-size: 0.98em;
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        .section ul {
+            list-style: none;
+            margin: 8px 0;
+        }
+
+        .section ul li {
+            position: relative;
+            padding: 8px 32px 8px 0;
+            color: #4a3540;
+            font-size: 0.96em;
+            line-height: 1.8;
+        }
+
+        .section ul li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            top: 8px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--success-bg);
+            color: var(--success-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            font-weight: 800;
+        }
+
+        .section ul.cross li::before {
+            content: '✕';
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* ===== Info Box ===== */
+        .info-box {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffffff 100%);
+            border-right: 4px solid var(--primary-light);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 14px 0;
+            font-size: 0.95em;
+            color: #4a3540;
+            line-height: 1.8;
+        }
+
+        /* ===== Contact ===== */
+        .contact {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius);
+            padding: 28px 28px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '✉️';
+            position: absolute;
+            font-size: 140px;
+            opacity: 0.08;
+            top: -30px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact h3 {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact p {
+            font-size: 0.95em;
+            opacity: 0.95;
+            margin-bottom: 16px;
+        }
+
+        .contact a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .contact a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            font-size: 0.88em;
+            color: var(--text-light);
+            padding: 8px 16px;
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.5s;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+            margin-bottom: 14px;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .footer a:hover { color: var(--primary-dark); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 480px) {
+            .header { padding: 32px 22px; }
+            .section { padding: 24px 20px; }
+            .contact { padding: 24px 20px; }
+            .highlight { padding: 20px 22px; flex-direction: column; }
+            .highlight-icon { width: 44px; height: 44px; font-size: 22px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔒 سیاست حریم خصوصی «روز من»</h1>
-        <p>آخرین به‌روزرسانی: مهر ۱۴۰۴</p>
+        
+        <!-- Back -->
+        <a href="index.html" class="back-link">← بازگشت به صفحه اصلی</a>
 
-        <h2>۱. اطلاعاتی که جمع‌آوری می‌کنیم</h2>
-        <p>اپلیکیشن «روز من» به هیچ عنوان اطلاعات شخصی کاربران را جمع‌آوری، ذخیره یا ارسال نمی‌کند. تمام اطلاعاتی که شما در اپ وارد می‌کنید (برنامه درسی، تکالیف، خاطرات) صرفاً روی دستگاه خودتان ذخیره می‌شود.</p>
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">🔒</div>
+            <h1>حریم <span>خصوصی</span></h1>
+            <p>برنامه روز من — تعهد ما به حفظ اطلاعات شما</p>
+            <div class="updated-badge">📅 آخرین به‌روزرسانی: مهر ۱۴۰۴</div>
+        </div>
 
-        <h2>۲. استفاده از اطلاعات</h2>
-        <p>اطلاعات شما فقط برای ارائه خدمات اپلیکیشن استفاده می‌شود و به هیچ شخص یا شرکت دیگری ارسال نمی‌شود.</p>
+        <!-- Highlight -->
+        <div class="highlight">
+            <div class="highlight-icon">🛡️</div>
+            <div class="highlight-content">
+                <h3>خلاصه در یک جمله</h3>
+                <p>برنامه «روز من» <strong>هیچ اطلاعاتی از شما جمع‌آوری، ذخیره یا ارسال نمی‌کند</strong>. تمام داده‌های شما فقط روی گوشی خودتان ذخیره می‌شود.</p>
+            </div>
+        </div>
 
-        <h2>۳. دسترسی‌ها</h2>
-        <p>اپلیکیشن «روز من» ممکن است برای عملکرد بهتر به این دسترسی‌ها نیاز داشته باشد:</p>
-        <ul>
-            <li>دسترسی به گالری (برای انتخاب عکس پروفایل یا پیوست خاطرات)</li>
-            <li>دسترسی به ذخیره‌سازی (برای پشتیبان‌گیری)</li>
-        </ul>
+        <!-- 1 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۱</span>
+                اطلاعاتی که جمع‌آوری می‌کنیم
+            </h2>
+            <p>برنامه «روز من» <strong>هیچ اطلاعاتی</strong> از کاربران جمع‌آوری نمی‌کند. این شامل موارد زیر است:</p>
+            <ul>
+                <li>هیچ اطلاعات هویتی (نام، ایمیل، شماره تلفن)</li>
+                <li>هیچ اطلاعات موقعیت مکانی (GPS)</li>
+                <li>هیچ داده تحلیلی یا آماری</li>
+                <li>هیچ اطلاعات دستگاه یا شناسه منحصربه‌فرد</li>
+                <li>هیچ گزارش خطا یا crash report</li>
+            </ul>
+        </div>
 
-        <h2>۴. امنیت</h2>
-        <p>تمام اطلاعات به صورت محلی روی دستگاه شما ذخیره می‌شود و شما می‌توانید با قفل برنامه از آن محافظت کنید.</p>
+        <!-- 2 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۲</span>
+                داده‌های شما کجا ذخیره می‌شود؟
+            </h2>
+            <p>تمام اطلاعاتی که در برنامه وارد می‌کنید (برنامه‌های درسی، تکالیف، امتحانات، یادداشت‌ها و خاطرات) <strong>فقط روی گوشی خودتان</strong> و در فضای ذخیره‌سازی داخلی برنامه ذخیره می‌شود.</p>
+            <div class="info-box">
+                💡 <strong>هیچ سروری وجود ندارد.</strong> اطلاعات شما به هیچ سرور داخلی یا خارجی ارسال نمی‌شود. برنامه کاملاً آفلاین کار می‌کند.
+            </div>
+        </div>
 
-        <h2>۵. تبلیغات</h2>
-        <p>اپلیکیشن «روز من» کاملاً رایگان است و هیچ تبلیغی نمایش نمی‌دهد.</p>
+        <!-- 3 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۳</span>
+                اشتراک‌گذاری با اشخاص ثالث
+            </h2>
+            <p>ما هیچ اطلاعاتی با هیچ شخص، شرکت یا سازمان ثالثی به اشتراک نمی‌گذاریم. برنامه «روز من» <strong>هیچ تبلیغاتی</strong> نمایش نمی‌دهد و هیچ SDK تبلیغاتی در آن نصب نیست.</p>
+        </div>
 
-        <h2>۶. تغییرات در سیاست حریم خصوصی</h2>
-        <p>در صورت تغییر این سیاست، از طریق همین صفحه اطلاع‌رسانی خواهد شد.</p>
+        <!-- 4 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۴</span>
+                دسترسی‌های برنامه
+            </h2>
+            <p>برنامه «روز من» برای عملکرد صحیح به حداقل دسترسی‌ها نیاز دارد:</p>
+            <ul>
+                <li><strong>ذخیره‌سازی:</strong> فقط برای ذخیره اطلاعات برنامه روی گوشی</li>
+                <li><strong>نوتیفیکیشن:</strong> برای نمایش یادآورها (اختیاری — با اجازه شما)</li>
+            </ul>
+            <p style="margin-top: 12px;">برنامه به هیچ‌کدام از این موارد <strong>دسترسی ندارد</strong>:</p>
+            <ul class="cross">
+                <li>دوربین</li>
+                <li>میکروفون</li>
+                <li>مخاطبین</li>
+                <li>پیامک‌ها</li>
+                <li>موقعیت مکانی</li>
+                <li>گالری تصاویر</li>
+            </ul>
+        </div>
 
-        <h2>۷. تماس با ما</h2>
-        <p>برای هرگونه سوال یا پیشنهاد: <a href="mailto:ali.maleki.ir@gmail.com
-">ali.maleki.ir@gmail.com
-</a></p>
+        <!-- 5 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۵</span>
+                امنیت اطلاعات
+            </h2>
+            <p>از آنجایی که تمام داده‌ها فقط روی گوشی شما ذخیره می‌شود، امنیت آن‌ها به امنیت دستگاه شما بستگی دارد. توصیه می‌کنیم:</p>
+            <ul>
+                <li>از قفل صفحه گوشی استفاده کنید</li>
+                <li>از قابلیت قفل داخلی برنامه «روز من» استفاده کنید</li>
+                <li>از گوشی خود در برابر نرم‌افزارهای ناشناس محافظت کنید</li>
+            </ul>
+        </div>
+
+        <!-- 6 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۶</span>
+                کودکان و نوجوانان
+            </h2>
+            <p>برنامه «روز من» برای دانش‌آموزان طراحی شده و هیچ اطلاعاتی از هیچ کاربری (در هر سنی) جمع‌آوری نمی‌کند. والدین می‌توانند با اطمینان از این برنامه استفاده کنند.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="num">۷</span>
+                تغییرات در این سیاست
+            </h2>
+            <p>در صورت هرگونه تغییر در این سیاست حریم خصوصی، نسخه به‌روزرسانی‌شده در همین صفحه منتشر می‌شود. تاریخ آخرین به‌روزرسانی در بالای صفحه ذکر شده است.</p>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact">
+            <div class="contact-content">
+                <h3>📩 سؤالی دارید؟</h3>
+                <p>اگه درباره حریم خصوصی سؤالی دارید، با ما در تماس باشید</p>
+                <a href="mailto:ali.maleki.ir@gmail.com">
+                    ✉️ ali.maleki.ir@gmail.com
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="index.html">🏠 صفحه اصلی</a>
+                <a href="https://github.com/Home3deh/rozeman" target="_blank" rel="noopener">💻 GitHub</a>
+            </div>
+            <div>© ۱۴۰۴ روز من — تمامی حقوق محفوظ است</div>
+        </div>
+        
     </div>
 </body>
 </html>
